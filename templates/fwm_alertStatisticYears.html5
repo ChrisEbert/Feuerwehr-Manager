@@ -1,0 +1,70 @@
+<div class="<?php echo $this->class; ?> block" <?php if ($this->style): ?>style="<?php echo $this->style; ?>"<?php endif; ?>>
+	<?php if ($this->headline): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+	<div id="totalAlertsMonthYears"></div>
+	
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+	    google.load("visualization", "1", {packages:["corechart"]});
+	    google.setOnLoadCallback(drawCharts);
+	    
+	    function drawCharts() {
+	    	var totalAlertsMonthYearsData = google.visualization.arrayToDataTable([
+	        	['<?php echo $this->totalAlertsMonthYears['dataHead']; ?>' 
+	        	<?php
+					foreach($this->totalAlertsMonthYears['data'] as $years){
+						foreach($years as $year=>$alerts){
+							echo ",'" . $year . "'";
+						}		
+						
+						echo "]";
+						break;
+					}       
+				?>          
+				<?php
+					foreach($this->totalAlertsMonthYears['data'] as $month=>$years){
+						echo ",['" . $month . "'";
+						
+						foreach($years as $alerts){
+							echo "," . $alerts;
+						}
+						
+						echo "]";
+					}
+				?>
+				]);
+	  
+			var totalAlertsMonthYearsOptions = {
+	        	vAxis:{format:'####'}
+	        	<?php if($this->chartOptions['showTitle']): ?>
+	        		,title: '<?php echo $this->totalAlertsMonthYears['title']; ?>'
+	        	<?php else: ?>
+	        		,title: ''
+	        	<?php endif; if($this->chartOptions['width']['value']): ?>
+	        		,chartArea : {
+	        			width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'
+	        		}
+	        	<?php endif; if($this->chartOptions['bgColor']): ?>
+	          		,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+	          	<?php endif; if($this->chartOptions['colors']): ?>
+	          		,colors : [
+	          		<?php 
+	          			foreach ($this->chartOptions['colors'] as $color) {
+	          				if($color != ''){
+	          					$colorStr .= ",'".html_entity_decode($color)."'";
+	          				}
+	          			}	
+	          			echo substr($colorStr, 1);
+	          		?>]
+	          	<?php endif; ?>
+	          		,legend : {
+	          			position:'<?php echo $this->chartOptions['posLegend']; ?>'
+	          		}  
+	        };
+	        
+	        var totalAlertsMonthYearsChart = new google.visualization.ColumnChart(document.getElementById('totalAlertsMonthYears'));
+	        totalAlertsMonthYearsChart.draw(totalAlertsMonthYearsData, totalAlertsMonthYearsOptions);
+	    }
+    </script>
+</div>

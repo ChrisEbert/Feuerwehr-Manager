@@ -1,0 +1,79 @@
+<?php foreach($this->alerts as $alert): ?>
+    <section class="box-simple">
+
+        <div class="btn">
+            <?php echo $alert['alertNumber']; ?>
+        </div>
+
+        <div class="btn-plain icon-calendar">
+            <time datetime="<?php echo $alert['datetime']; ?>"><?php echo $alert['dayStart']; ?></time>
+        </div>
+
+        <h3 class="alert-type">
+            <?php echo $alert['type']; ?>
+        </h3>
+
+        <div class="alert-details">
+        <?php if(empty($alert['latlng']) === false): ?>
+            <img src="http://maps.googleapis.com/maps/api/staticmap?center=<?php echo $alert['latlng']; ?>&zoom=15&scale=1&size=608x200&maptype=roadmap&sensor=false&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red%7Clabel:%7C<?php echo $alert['latlng']; ?>" />
+        <?php endif; ?>
+        </div>
+    </section>
+<?php endforeach; ?>
+
+
+<!--
+
+<div class="<?php echo $this->class; ?> block" <?php if ($this->style): ?>style="<?php echo $this->style; ?>"<?php endif; ?>>
+	<?php if ($this->headline): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+	
+	<?php foreach($this->alerts as $alert): ?>
+	<section>
+		<div class="toggler active " aria-expanded="true" role="tab" tabindex="0">
+			<span class="toggler_first">
+				<strong>Einsatznummer:</strong> <?php echo $alert['alertNumber']; ?> - 
+				<strong>Einsatzart:</strong> <?php echo $alert['type']; ?> -
+				<strong>Datum:</strong> <time datetime="<?php echo $alert['datetime']; ?>"><?php echo $alert['dayStart']; ?></time>
+			</span> 
+		</div>	
+		<div class="accordion" aria-hidden="false" role="tabpanel"><div>
+			<p>
+				<strong>Datum:</strong> <?php echo $alert['dayStart']; ?> (<?php echo $alert['weekdayStart']; ?>) 
+				<?php if($alert['multipleDays']): ?>
+					- <?php echo $alert['dayEnd']; ?> (<?php echo $alert['weekdayEnd']; ?>) 
+				<?php endif; ?>
+				<?php if($alert['timeStart']): ?>
+					<strong>Zeit:</strong> <?php echo $alert['timeStart']; ?>
+					<?php if($alert['timeEnd']): ?>
+						- <?php echo $alert['timeEnd']; ?> 
+					<?php endif; ?>
+				<?php endif; ?>
+				<?php if($alert['location']): ?>
+					<strong>Ort:</strong> <?php echo $alert['location']; ?>
+				<?php endif; ?>		
+			</p>
+			<?php if($alert['description']): ?>
+				<p><strong>Beschreibung:</strong></p>
+				<?php echo $alert['description']; ?>
+			<?php endif; ?>
+			<?php if($alert['preview']): ?>
+				<p><strong>Gallerie:</strong></p>
+				<figure class="image_container">
+					<a href="<?php echo $alert['galleryLink']; ?>" title="<?php echo $alert['previewTitle']; ?>">
+						<?php echo $alert['previewImage']; ?>
+						<?php if($alert['previewCaption']): ?>
+							<figcaption class="caption">
+								<?php echo $alert['previewCaption']; ?>
+							</figcaption>
+						<?php endif; ?>
+					</a>
+				<figure>
+			<?php endif; ?>
+		</div>
+	</div>
+	</section>
+	<?php endforeach; ?>
+</div>
+-->

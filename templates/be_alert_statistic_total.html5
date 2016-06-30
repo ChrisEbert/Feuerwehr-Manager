@@ -1,0 +1,76 @@
+<div id="tl_buttons">
+	<a href="<?php echo $this->backHref; ?>" class="header_back" title="<?php echo $this->backTitle; ?>"><?php echo $this->backButton; ?></a>
+</div>
+<h2 class="sub_headline"><?php echo $this->headline; ?></h2>
+<div id="totalAlertsYears"></div>    
+<div id="totalAlertsMonthYears"></div>
+
+<script src="https://www.google.com/jsapi"></script>
+<script>
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawCharts);
+
+function drawCharts() {
+	var totalAlertsYearsData = google.visualization.arrayToDataTable([
+		<?php
+			echo $this->totalAlertsYears['dataHead'];
+			
+			foreach($this->totalAlertsYears['data'] as $years=>$alerts)
+			{
+				echo ",[" . $years . "," . $alerts . "]";
+			}
+		?>
+	]);
+
+	var totalAlertsMonthYearsData = google.visualization.arrayToDataTable([
+		['<?php echo $this->totalAlertsMonthYears['dataHead']; ?>' 
+		<?php
+			foreach($this->totalAlertsMonthYears['data'] as $years)
+			{
+				foreach($years as $year=>$alerts)
+				{
+					echo ",'" . $year . "'";
+				}
+				
+				echo "]";
+				
+				break;
+			}       
+		?>
+		<?php
+			foreach($this->totalAlertsMonthYears['data'] as $month=>$years)
+			{
+				echo ",['" . $month . "'";
+				
+				foreach($years as $alerts){
+					echo "," . $alerts;
+				}
+				
+				echo "]";
+			}
+		?>
+	]);
+
+	var totalAlertsYearsOptions = {
+		title: <?php echo "'" . $this->totalAlertsYears['title'] ."'"; ?>,
+		chartArea: {
+			width: 550
+		},
+		hAxis: {format:'####'}
+	};
+
+	var totalAlertsMonthYearsOptions = {
+		title: '<?php echo $this->totalAlertsMonthYears['title']; ?>',
+		chartArea: {
+			width: 550
+		},
+		vAxis:{format:'####'}
+	};
+
+	var totalAlertsYearsChart = new google.visualization.LineChart(document.getElementById('totalAlertsYears'));
+	totalAlertsYearsChart.draw(totalAlertsYearsData, totalAlertsYearsOptions);
+	
+	var totalAlertsMonthYearsChart = new google.visualization.ColumnChart(document.getElementById('totalAlertsMonthYears'));
+	totalAlertsMonthYearsChart.draw(totalAlertsMonthYearsData, totalAlertsMonthYearsOptions);
+}
+</script>

@@ -1,0 +1,27 @@
+<div class="<?php echo $this->class; ?> block" <?php if ($this->style): ?>style="<?php echo $this->style; ?>"<?php endif; ?>>
+	<?php if ($this->galleryViewer):?>
+		<div class="gallery-viewer">
+			<figure>
+			<?php foreach($this->galleryViewer as $thumb):?>
+				<a href="<?php echo $thumb['src']; ?>" title="<?php echo $thumb['caption']; ?>" data-lightbox="lb7">
+					<img src="<?php echo $thumb['thumb']; ?>" <?php echo $thumb['size']; ?> alt="<?php echo $thumb['alt']; ?>" />
+				</a>
+			<?php endforeach;?>
+			</figure>
+		</div>
+		<hr/>
+	<?php endif;?>
+		<nav>
+			<ul>
+				<?php foreach ($this->galleryPreview as $value): ?>
+					<li>
+					<?php if(!$value['isActive']): ?>
+						<a href="<?php echo $value['galleryLink']; ?>" title="<?php echo $value['dateStart'] . " - " . $value['alertType']; ?>"><?php echo $value['dateStart'] . " - " . $value['alertType']; ?></a>
+					<?php else: ?>
+						<span><?php echo $value['dateStart'] . " - " . $value['alertType']; ?></span>
+					<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</nav>
+</div>

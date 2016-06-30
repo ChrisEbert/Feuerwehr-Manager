@@ -1,0 +1,106 @@
+<div id="alertMap" class="alert-map"></div>
+
+<script>
+function initializeAlertMap() {
+    var markerModel = $.parseJSON('<?php echo $this->alerts; ?>');
+
+    var mapOptions = {
+        zoom: 14,
+        center: new google.maps.LatLng(51.1266143,13.1164521),
+        zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL,
+            position: google.maps.ControlPosition.LEFT_CENTER
+        },
+        streetViewControl: false,
+        panControl: false,
+        mapTypeControl: false,
+        scrollwheel: false
+    };
+
+    var clustererOptions =  {
+        styles: [
+            {
+                textColor: 'white',
+                url: 'files/layout/cluster.png',
+                height: 54,
+                width: 54
+            }
+        ]
+    };
+
+    var map = new google.maps.Map($("#alertMap")[0], mapOptions);
+
+    var markers = [];
+
+    var currentInfoWindow = {close: $.noop};
+
+    var request = function(id) {
+
+        var thisMarker = this;
+
+        markerModel[thisMarker.id].oLayer = new google.maps.InfoWindow({
+            content: '<div class="details-wrapper"><img src="files/layout/preloader.gif" width="32px" height="32px" class="preloader" /></div>'
+        });
+
+        currentInfoWindow = markerModel[thisMarker.id].oLayer;
+        currentInfoWindow.open(map, thisMarker);
+        map.panTo(thisMarker.position);
+        map.panBy(0, -80);
+
+        $.ajax({
+            url: 'SimpleAjaxFrontend.php',
+            type: 'POST',
+            dataType: 'html',
+            data: {
+                _method: 'getDetails',
+                id: thisMarker.id
+            }
+        }).done(function(response) {
+
+            markerModel[thisMarker.id].oLayer.setContent(response);
+
+        });
+    };
+
+    for (var id in markerModel) {
+        markerModel[id].oMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(markerModel[id].lat, markerModel[id].lng)
+        });
+
+        markerModel[id].oMarker.id = id;
+
+        markerModel[id].oLayer = null;
+
+        google.maps.event.addListener(markerModel[id].oMarker, 'click', function() {
+
+            currentInfoWindow.close();
+
+            if (markerModel[this.id].oLayer) {
+                currentInfoWindow = markerModel[this.id].oLayer;
+                currentInfoWindow.open(map, this);
+                map.panTo(this.position);
+            }
+            else {
+                request.call(this);
+            }
+
+        });
+
+        markers.push(markerModel[id].oMarker);
+    }
+
+
+    var markerCluster = new MarkerClusterer(map, markers, clustererOptions);
+}
+
+(function($) {
+    $(function() {
+        var script = $("<script />");
+        script.attr('type', "text/javascript");
+        script.attr('src', "http://maps.googleapis.com/maps/api/js?sensor=true&callback=initializeAlertMap");
+
+        $('body').append(script);
+    });
+})(jQuery);
+</script>
+

@@ -1,0 +1,92 @@
+<div class="<?php echo $this->class; ?> block" <?php if ($this->style): ?>style="<?php echo $this->style; ?>"<?php endif; ?>>
+	<?php if ($this->headline): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+	<div id="totalAlertsMonth"></div>
+    <div id="totalAlertTypes"></div>
+    
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+    	google.load("visualization", "1", {packages:["corechart"]});
+    	google.setOnLoadCallback(drawCharts);
+    	
+    	function drawCharts() {       
+        	var totalAlertsMonthData = google.visualization.arrayToDataTable([
+			<?php
+				echo $this->totalAlertsMonth['dataHead'];
+
+				foreach($this->totalAlertsMonth['data'] as $month=>$alerts){
+					echo ",['" . $month . "'," . $alerts . "]";
+				}
+			?>
+			]);
+                
+            var totalAlertTypesData = google.visualization.arrayToDataTable([  
+			<?php
+				echo $this->totalAlertTypes['dataHead'];
+	
+				foreach($this->totalAlertTypes['data'] as $type=>$count){
+					echo ",['" . $type . "'," . $count . "]";
+				}
+			?>
+			]);
+        
+			var totalAlertsMonthOptions = {
+	          vAxis : {format : '####'}
+	          <?php if($this->chartOptions['showTitle']): ?>
+		          ,title: '<?php echo $this->totalAlertsMonth['title']; ?>'
+	          <?php else: ?>
+		      	  ,title: ''
+	          <?php endif; if($this->chartOptions['width']['value']): ?>
+	    	      ,chartArea : {
+	    	      		width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'
+	    	      }
+	          <?php endif; if($this->chartOptions['bgColor']): ?>
+	        	  ,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+	          <?php endif; if($this->chartOptions['colors']): ?>
+	          	  ,colors : [
+	          	  <?php 
+		          	  foreach ($this->chartOptions['colors'] as $color) {
+			          	  if($color != ''){
+				          	  $colorStr .= ",'".html_entity_decode($color)."'";
+				          }
+				       }
+	          		   echo substr($colorStr, 1);
+	          	   ?>
+	          	   ]
+	          <?php endif; ?>
+	          	   ,legend : {position:'<?php echo $this->chartOptions['posLegend']; ?>'}
+	        };
+        
+	        var totalAlertTypesOptions = {
+	    	<?php if($this->chartOptions['showTitle']): ?>
+	    		title: '<?php echo $this->totalAlertTypes['title']; ?>'
+	    	<?php else: ?>
+	    		title: ''
+	    	<?php endif; if($this->chartOptions['width']['value']): ?>
+	    		,chartArea : {width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'}
+	    	<?php endif; if($this->chartOptions['bgColor']): ?>
+	    		,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+	    	<?php endif; if($this->chartOptions['colors']): ?>
+	    		,colors : [
+	    		<?php 
+      				foreach ($this->chartOptions['colors'] as $color) {
+      					if($color != ''){
+      						$colorStr .= ",'".html_entity_decode($color)."'";
+      					}
+      				}
+      				echo substr($colorStr, 1);
+      			?>
+      			]
+      		<?php endif; ?>
+      			,legend : {position:'<?php echo $this->chartOptions['posLegend']; ?>'}
+          	};
+                
+          	var totalAlertsMonthChart = new google.visualization.ColumnChart(document.getElementById('totalAlertsMonth'));
+          	totalAlertsMonthChart.draw(totalAlertsMonthData, totalAlertsMonthOptions);
+        
+          	var totalAlertTypesChart = new google.visualization.PieChart(document.getElementById('totalAlertTypes'));
+          	totalAlertTypesChart.draw(totalAlertTypesData, totalAlertTypesOptions);
+      	}
+  	</script>
+</div>

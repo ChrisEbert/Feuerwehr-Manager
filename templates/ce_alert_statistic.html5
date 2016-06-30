@@ -1,0 +1,189 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+    google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawCharts);
+      function drawCharts() {
+
+    
+
+<?php if($this->chartType === 'year'): ?>
+                var totalAlertsYearsData = google.visualization.arrayToDataTable([
+<?php
+
+echo $this->chart['dataHead'];
+
+foreach($this->chart['data'] as $years=>$alerts){
+
+
+	echo ",[" . $years . "," . $alerts . "]";
+
+}
+
+?>
+        ]);
+
+        var totalAlertsYearsOptions = {
+         hAxis: {format:'####'}
+         <?php if($this->chartOptions['showTitle']): ?>
+          ,title: '<?php echo $this->chart['title']; ?>'
+          <?php else: ?>
+          ,title: ''
+          <?php endif; if($this->chartOptions['width']['value']): ?>
+          ,chartArea : {width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'}
+          <?php endif; if($this->chartOptions['bgColor']): ?>
+          ,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+          <?php endif; if($this->chartOptions['colors']): ?>
+          ,colors : [<?php 
+          				foreach ($this->chartOptions['colors'] as $color) {
+          					if($color != ''){
+          						$colorStr .= ",'".html_entity_decode($color)."'";
+          					}
+          				}
+          				
+          				echo substr($colorStr, 1);
+          			?>]
+          <?php endif; ?>
+          ,legend : {position:'<?php echo $this->chartOptions['posLegend']; ?>'}
+        };
+        var totalAlertsYearsChart = new google.visualization.LineChart(document.getElementById('totalAlertsYears'));
+        totalAlertsYearsChart.draw(totalAlertsYearsData, totalAlertsYearsOptions);
+        
+
+}
+</script>
+
+<div id="totalAlertsYears"></div>    
+<?php elseif ($this->chartType === 'month'): ?>
+
+              var totalAlertsMonthYearsData = google.visualization.arrayToDataTable([
+          ['<?php echo $this->chart['dataHead']; ?>' 
+          <?php
+          
+			foreach($this->chart['data'] as $years){
+			
+				foreach($years as $year=>$alerts){
+				
+					echo ",'" . $year . "'";
+				
+				
+				}
+			
+			echo "]";
+			break;
+			
+			}       
+          ?>
+          
+<?php
+
+foreach($this->chart['data'] as $month=>$years){
+echo ",['" . $month . "'";
+	foreach($years as $alerts){
+	
+		echo "," . $alerts;
+	
+	
+	}
+
+echo "]";
+
+
+}
+
+
+?>
+        ]);
+  
+        
+
+        
+        
+     
+        
+        var totalAlertsMonthYearsOptions = {
+          vAxis:{format:'####'}
+          <?php if($this->chartOptions['showTitle']): ?>
+          ,title: '<?php echo $this->totalAlertsMonthYears['title']; ?>'
+          <?php else: ?>
+          ,title: ''
+          <?php endif; if($this->chartOptions['width']['value']): ?>
+          ,chartArea : {width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'}
+          <?php endif; if($this->chartOptions['bgColor']): ?>
+          ,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+          <?php endif; if($this->chartOptions['colors']): ?>
+          ,colors : [<?php 
+          				foreach ($this->chartOptions['colors'] as $color) {
+          					if($color != ''){
+          						$colorStr .= ",'".html_entity_decode($color)."'";
+          					}
+          				}
+          				
+          				echo substr($colorStr, 1);
+          			?>]
+          <?php endif; ?>
+          ,legend : {position:'<?php echo $this->chartOptions['posLegend']; ?>'}
+          
+        };
+        
+        
+        
+        
+        var totalAlertsMonthYearsChart = new google.visualization.ColumnChart(document.getElementById('totalAlertsMonthYears'));
+        totalAlertsMonthYearsChart.draw(totalAlertsMonthYearsData, totalAlertsMonthYearsOptions);
+        
+        
+        }
+     </script>
+<div id="totalAlertsMonthYears"></div>
+<?php elseif ($this->chartType === 'type'): ?>
+
+		
+                        var totalAlertTypesData = google.visualization.arrayToDataTable([
+          
+<?php
+echo $this->chart['dataHead'];
+foreach($this->chart['data'] as $type=>$count){
+
+
+	echo ",['" . $type . "'," . $count . "]";
+
+}
+
+?>
+        ]);
+
+        var totalAlertTypesOptions = {
+          <?php if($this->chartOptions['showTitle']): ?>
+          title: '<?php echo $this->chart['title']; ?>'
+          <?php else: ?>
+          title: ''
+          <?php endif; if($this->chartOptions['width']['value']): ?>
+          ,chartArea : {width: '<?php echo $this->chartOptions['width']['value'] . $this->chartOptions['width']['unit']; ?>'}
+          <?php endif; if($this->chartOptions['bgColor']): ?>
+          ,backgroundColor : '#<?php echo $this->chartOptions['bgColor']; ?>'
+          <?php endif; if($this->chartOptions['colors']): ?>
+          ,colors : [<?php 
+          				foreach ($this->chartOptions['colors'] as $color) {
+          					if($color != ''){
+          						$colorStr .= ",'".html_entity_decode($color)."'";
+          					}
+          				}
+          				
+          				echo substr($colorStr, 1);
+          			?>]
+          <?php endif; ?>
+          ,legend : {position:'<?php echo $this->chartOptions['posLegend']; ?>'}
+        };
+		
+        var totalAlertTypesChart = new google.visualization.PieChart(document.getElementById('totalAlertTypes'));
+        totalAlertTypesChart.draw(totalAlertTypesData, totalAlertTypesOptions);
+        }
+</script>
+<div id="totalAlertTypes"></div>
+<?php endif; ?>
+
+<?php 
+
+var_dump($this->chart['data']);
+
+?>

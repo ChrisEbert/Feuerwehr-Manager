@@ -1,0 +1,50 @@
+<div id="tl_buttons">
+	<a href="<?php echo $this->backHref; ?>" class="header_back" title="<?php echo $this->backTitle; ?>"><?php echo $this->backButton; ?></a>
+</div>
+<h2 class="sub_headline"><?php echo $this->headline; ?></h2>
+<div id="totalAlertsMonth"></div>
+<div id="totalAlertTypes"></div>
+
+<script src="https://www.google.com/jsapi"></script>
+<script>
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawCharts);
+
+function drawCharts() {
+	var totalAlertsMonthData = google.visualization.arrayToDataTable([
+		<?php
+			echo $this->totalAlertsMonth['dataHead'];
+			foreach($this->totalAlertsMonth['data'] as $month=>$alerts){
+				echo ",['" . $month . "'," . $alerts . "]";
+			}
+		?>
+	]);
+
+	var totalAlertTypesData = google.visualization.arrayToDataTable([
+		<?php
+			echo $this->totalAlertTypes['dataHead'];
+			foreach($this->totalAlertTypes['data'] as $type=>$count){
+				echo ",['" . $type . "'," . $count . "]";
+			}
+		?>
+	]);
+
+	var totalAlertsMonthOptions = {
+		title: '<?php echo $this->totalAlertsMonth['title']; ?>',
+		chartArea: {
+			width: 550
+		},
+		vAxis : {format : '####'}
+	};
+
+	var totalAlertTypesOptions = {
+		title: '<?php echo $this->totalAlertTypes['title']; ?>'
+	};
+
+	var totalAlertsMonthChart = new google.visualization.ColumnChart(document.getElementById('totalAlertsMonth'));
+	totalAlertsMonthChart.draw(totalAlertsMonthData, totalAlertsMonthOptions);
+
+	var totalAlertTypesChart = new google.visualization.PieChart(document.getElementById('totalAlertTypes'));
+	totalAlertTypesChart.draw(totalAlertTypesData, totalAlertTypesOptions);
+}
+</script>

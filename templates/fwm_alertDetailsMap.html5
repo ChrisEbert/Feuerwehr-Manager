@@ -1,0 +1,11 @@
+<div class="details-wrapper">
+    <dl class="alert-details">
+        <dt>Nummer:</dt>
+        <dd><?php echo $this->alert['alertNumber']; ?></dd>
+        <dt>Datum:</dt>
+        <dd><?php echo $this->alert['date']; ?></dd>
+        <dt>Art:</dt>
+        <dd><?php echo $this->alert['type']; ?></dd>
+    </dl>
+    <a href="">Einsatzdetails</a>
+</div>
