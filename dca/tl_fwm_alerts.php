@@ -73,12 +73,6 @@ $GLOBALS['TL_DCA']['tl_fwm_alerts'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_fwm_alerts']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
-			),
-			'fb' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_fwm_alerts']['fb'],
-				'href'                => 'key=fb',
-				'icon'                => 'show.gif'
 			)
 		)
 	),
