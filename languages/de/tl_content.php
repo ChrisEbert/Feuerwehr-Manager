@@ -19,7 +19,6 @@ $GLOBALS['TL_LANG']['tl_content']['fwm']['chartPositions']['none'] 		= 'nicht an
 $GLOBALS['TL_LANG']['tl_content']['statistic_legend'] 	= 'Statistikkonfiguration';
 $GLOBALS['TL_LANG']['tl_content']['config_legend'] 		= 'Diagrammeinstellungen';
 
-
 $GLOBALS['TL_LANG']['tl_content']['fwm']['statisticType'] 		= array('Statistiktyp','Bitte wählen Sie einen Statistiktyp aus. Eine Erklärung für jeden Typ steht im Hilfe-Assistent.');
 $GLOBALS['TL_LANG']['tl_content']['fwm']['statisticYear'] 		= array('Jahresauswahl','Bitte wählen Sie ein Jahr oder einen Zeitraum aus.');
 $GLOBALS['TL_LANG']['tl_content']['fwm']['chartShowTitle'] 		= array('Statistiktitel','Den Titel der Statistik im Diagramm Anzeigen.');

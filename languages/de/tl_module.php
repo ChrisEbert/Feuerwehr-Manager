@@ -23,3 +23,10 @@ $GLOBALS['TL_LANG']['tl_module']['fwm']['chartWidth'] 			= array('Breite','Hier 
 $GLOBALS['TL_LANG']['tl_module']['fwm']['chartBg'] 				= array('Hintergrundfarbe','Hier können Sie eine Hintergrundfarbe für das Diagramm festlegen, Standard ist weiß.');
 $GLOBALS['TL_LANG']['tl_module']['fwm']['chartPositionLegend'] 	= array('Position der Legende','Hier können Sie die Position der Legende bestimmen bzw. auch ausblenden.');
 $GLOBALS['TL_LANG']['tl_module']['fwm']['chartColors'] 			= array('Datensatzfarben','Hier können Sie eine Komma getrennte Liste an Farbwerten für die einzelnen Datensätze festlegen.');
+
+
+$GLOBALS['TL_LANG']['tl_module']['department_legend']	= 'Feuerwachen';
+$GLOBALS['TL_LANG']['tl_module']['filter_legend']	= 'Filter';
+
+$GLOBALS['TL_LANG']['tl_module']['fwm']['departments'] = array('Feuerwachen', 'Von dieser Feuerwache wird der letzte Einsatz angezeigt.');
+$GLOBALS['TL_LANG']['tl_module']['fwm']['filter'] = array('Filter', 'Anhand welches Kriterium sollen die Einsätze aufgelistet werden.');

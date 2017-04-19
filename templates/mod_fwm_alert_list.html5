@@ -1,0 +1,111 @@
+<?php if(empty($this->alerts) === false): ?>
+  <div class="alert-list">
+    <?php
+      $lastMonth = '';
+    ?>
+    <?php foreach($this->alerts as $alert): ?>
+      <?php $month = $this->parseDate('F', $alert['dateStart']['timestamp']); if($month !== $lastMonth): ?>
+        <div class="separator">
+          <?= $month; ?>
+        </div>
+      <?php $lastMonth = $month; endif; ?>
+
+      <div class="alert js-alert">
+        <div class="date-holder">
+          <div class="number">
+            <?= $this->totalAlerts; ?>
+          </div>
+
+          <div class="date">
+            <span>
+              <?= $this->parseDate('D d.m.', $alert['dateStart']['timestamp']); ?>
+            </span>
+
+            <span>
+              <?= $this->parseDate('H:i', $alert['dateStart']['timestamp']); ?> Uhr
+            </span>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="title">
+            <?= $alert['type']; ?>, <?= $alert['location']; ?>
+
+            <button class="btn js-details-trigger" type="button">Details</button>
+          </div>
+
+          <div class="details js-details">
+            <div class="section">
+              <span class="subtitle icon-firefighter">Einsatzkräfte</span>
+
+              <ul>
+                <?php foreach($alert['departments'] as $departmentsKey => $department): ?>
+                  <li>
+                    <?= $department['title']; ?>:
+
+                    <?php $vehicles = ''; foreach($alert['vehicles'] as $vehicle): ?>
+                      <?php if($vehicle['pid'] === $department['id']): ?>
+                        <?php $vehicles .= $vehicle['title'] . ', '; ?>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+
+                    <?= rtrim($vehicles, ', '); ?>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+
+            <div class="section">
+              <span class="subtitle icon-clock">Einsatzdauer</span>
+
+              Von: <?= $this->parseDate('l, d.m.Y, H:i', $alert['dateStart']['timestamp']); ?> Uhr
+              <?php if (empty($alert['dateEnd']) === false): ?>
+                <br />
+                Bis: <?= $this->parseDate('d.m.Y, H:i', $alert['dateEnd']['timestamp']); ?> Uhr
+                <br />
+                Dauer: <?= $alert['duration'][0]; ?> h <?= $alert['duration'][1]; ?> min
+              <?php endif; ?>
+            </div>
+
+            <?php if(empty($alert['description']) === false): ?>
+              <div class="section">
+                <span class="subtitle icon-article">Einsatzbericht</span>
+                <?= $alert['description']; ?>
+              </div>
+            <?php endif; ?>
+
+            <?php if(empty($alert['images']) === false): ?>
+              <div class="section">
+                <span class="subtitle icon-picture">Einsatzbilder</span>
+
+                <div class="js-gallery gallery">
+                  <?php foreach($alert['images'] as $image): ?>
+                    <a href="<?= $image['singleSRC']; ?>">
+                      <figure>
+                        <img data-src="<?= $image['preview']; ?>" />
+                      </figure>
+                    </a>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+
+            <?php if(empty($alert['latlng']) === false): ?>
+              <div class="section">
+                <span class="subtitle icon-location">Einsatzort</span>
+                <p>
+                  <?= $alert['location']; ?>
+                </p>
+                <div class="js-map" data-latlng="<?= $alert['latlng']; ?>" style="width: 100%;height: 300px;"></div>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    <?php $this->totalAlerts--; endforeach; ?>
+  </div>
+<?php else: ?>
+  <div>
+    In diesem Jahr sind keine Einsätze vorhanden.
+  </div>
+<?php endif; ?>

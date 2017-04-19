@@ -1,0 +1,25 @@
+<div class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
+  <div class="intro">
+    <span class="title">
+      Letzer Einsatz
+    </span>
+    <a href="<?= $this->alertListPage; ?>">Einsatzübersicht</a>
+  </div>
+
+  <div class="infos">
+    <div class="type">
+      <span class="label">Art</span>
+      <span class="value"><?= $this->alert['type']; ?></span>
+    </div>
+
+    <div class="type">
+      <span class="label">Datum</span>
+      <span class="value"><?= $this->alert['dateStart']['date']; ?> Uhr</span>
+    </div>
+
+    <div class="type">
+      <span class="label">Ort</span>
+      <span class="value"><?= $this->alert['location']; ?></span>
+    </div>
+  </div>
+</div>

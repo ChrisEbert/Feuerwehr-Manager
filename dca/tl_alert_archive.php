@@ -1,8 +1,5 @@
-<?php 
+<?php
 
-/**
- * Table tl_alert_archive
- */
 $GLOBALS['TL_DCA']['tl_alert_archive'] = array
 (
 
@@ -13,6 +10,13 @@ $GLOBALS['TL_DCA']['tl_alert_archive'] = array
 		'ctable'                      => array('tl_alert'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -45,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_alert_archive'] = array
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
-			
+
 		),
 		'operations' => array
 		(
@@ -100,20 +104,30 @@ $GLOBALS['TL_DCA']['tl_alert_archive'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'year' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_alert_archive']['year'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>4, 'rgxp'=>'digit')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>4, 'rgxp'=>'digit'),
+			'sql'                     => "varchar(4) NOT NULL default ''"
 		),
 		'galleryPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_alert_archive']['galleryPage'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql' 										=> "int(10) unsigned NOT NULL default '0'"
 		),
 		'published' => array
 		(
@@ -122,21 +136,24 @@ $GLOBALS['TL_DCA']['tl_alert_archive'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql' 										=> "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_alert_archive']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'											=> "varchar(10) NOT NULL default ''"
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_alert_archive']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'											=> "varchar(10) NOT NULL default ''"
 		)
 	)
 );
