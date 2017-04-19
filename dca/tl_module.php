@@ -18,63 +18,26 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alert_list'] = '
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['fwm_departments'] = array
 (
-	'label'         		=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['departments'],
-	'exclude'       		=> true,
-	'inputType'     		=> 'radio',
-	'foreignKey'				=> 'tl_fwm_departments.title',
-	'eval'          		=> array('tl_class' => 'w50'),
-	'sql'								=> "int(10) unsigned NOT NULL default '0'"
+	'label'       => &$GLOBALS['TL_LANG']['tl_module']['fwm']['departments'],
+	'exclude'     => true,
+	'inputType'   => 'radio',
+	'foreignKey'	=> 'tl_fwm_departments.title',
+	'eval'        => array('tl_class' => 'w50'),
+	'sql'					=> "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['filter'] = array
 (
-	'label'         		=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['filter'],
-	'exclude'       		=> true,
-	'inputType'     		=> 'select',
-	'options'						=> array('year'=>'Jahr'),
-	'eval'          		=> array('tl_class' => 'w50'),
-	'sql'								=> "varchar(32) NOT NULL default ''"
+	'label'     => &$GLOBALS['TL_LANG']['tl_module']['fwm']['filter'],
+	'exclude'   => true,
+	'inputType'	=> 'select',
+	'options'		=> array('year'=>'Jahr'),
+	'eval'      => array('tl_class' => 'w50'),
+	'sql'				=> "varchar(32) NOT NULL default ''"
 );
-
-
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertArchive'] = '
-	{title_legend},name,headline,type;
-	{config_legend},fwm_alert_archives;
-	{template_legend:hide},fwm_template;
-	{protected_legend:hide},protected;
-	{expert_legend:hide},guests,cssID,space';
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertArchiveMenu'] =	'
-	{title_legend},name,headline,type;
-	{config_legend},fwm_alert_menulinks,fwm_all_link;
-	{redirect_legend},jumpTo;
-	{template_legend:hide},fwm_template;
-	{protected_legend:hide},protected;
-	{expert_legend:hide},guests,cssID,space';
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertArchiveReader'] =	'
-	{title_legend},name,headline,type;
-	{template_legend:hide},fwm_template;
-	{protected_legend:hide},protected;
-	{expert_legend:hide},guests,cssID,space';
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertLast'] = '
-	{title_legend},name,headline,type;
-	{template_legend:hide},fwm_template;
-	{protected_legend:hide},protected;
-	{expert_legend:hide},guests,cssID,space';
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertMap'] = '
 	{title_legend},name,headline,type;
-	{template_legend:hide},fwm_template;
-	{protected_legend:hide},protected;
-	{expert_legend:hide},guests,cssID,space';
-
-$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertGalleryViewer'] =	'
-	{title_legend},name,headline,type;
-	{config_legend},fwm_alert_gallery_thumbs;
-	{redirect_legend},jumpTo;
 	{template_legend:hide},fwm_template;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
@@ -93,15 +56,6 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertStatisticReader'] = '
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['fwm_alert_archives'] = array
-(
-  'label'      				=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['alert_archives'],
-  'inputType'  				=> 'select',
-  'foreignKey' 				=> 'tl_alert_archive.year',
-  'eval'       				=> array('mandatory' => true),
-	'sql'								=> "int(10) unsigned NOT NULL default '0'"
-);
-
 $GLOBALS['TL_DCA']['tl_module']['fields']['fwm_alert_menulinks'] = array
 (
 	'label'         		=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['alert_menulinks'],
@@ -110,25 +64,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['fwm_alert_menulinks'] = array
 	'foreignKey' 				=> 'tl_alert_archive.year',
 	'eval'          		=> array('multiple'=>true),
 	'sql'								=> "blob NULL"
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['fwm_alert_gallery_thumbs'] = array
-(
-	'label' 						=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['alert_gallery_thumbs'],
-	'exclude' 					=> true,
-	'inputType' 				=> 'imageSize',
-	'options' 					=> array('crop', 'proportional', 'box'),
-	'reference' 				=> &$GLOBALS['TL_LANG']['MSC'],
-	'eval' 							=> array('rgxp'=>'digit', 'nospace'=> true, 'helpwizard'=> true, 'tl_class'=>'clr'),
-	'sql'								=> "varchar(64) NOT NULL default ''"
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['fwm_all_link'] = array
-(
-	'label'         		=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['all_link'],
-	'exclude'       		=> true,
-	'inputType'     		=> 'checkbox',
-	'sql'								=> "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['fwm_chartBg'] = array
