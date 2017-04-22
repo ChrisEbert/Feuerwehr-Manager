@@ -1,0 +1,10 @@
+{
+  "name":"ChrisEbert/feuerwehr_manager",
+  "description":"Eine Contao Erweiterung um Feuerwehreinsätze zu verwalten.",
+  "keywords":["contao", "feuerwehr"],
+  "type":"contao-module",
+  "require": {
+    "php":">=5.4",
+    "contao/core": "~3.5"
+  }
+}
