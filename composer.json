@@ -1,5 +1,5 @@
 {
-  "name":"ChrisEbert/feuerwehr_manager",
+  "name":"chris-ebert/feuerwehr_manager",
   "description":"Eine Contao Erweiterung um Feuerwehreinsätze zu verwalten.",
   "keywords":["contao", "feuerwehr"],
   "type":"contao-module",
