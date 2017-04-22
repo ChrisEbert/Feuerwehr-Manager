@@ -5,6 +5,14 @@
   "type":"contao-module",
   "require": {
     "php":">=5.4",
-    "contao/core": "~3.5"
+    "contao/core": "~3.5",
+    "contao-community-alliance/composer-plugin": "~2.0"
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "": "system/modules/feuerwehr-manager"
+      }
+    }
   }
 }
