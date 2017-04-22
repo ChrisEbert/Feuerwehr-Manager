@@ -7,20 +7,20 @@ $GLOBALS['BE_MOD']['fwm'] = array(
 	'alerts' => array
 	(
 		'tables' 					=> array('tl_fwm_alerts'),
-	  'icon'   					=> 'system/modules/feuerwehr_manager/assets/images/fire.png',
-	  'stylesheet' 			=> 'system/modules/feuerwehr_manager/assets/css/be_style.css',
+	  'icon'   					=> 'system/modules/feuerwehr-manager/assets/images/fire.png',
+	  'stylesheet' 			=> 'system/modules/feuerwehr-manager/assets/css/be_style.css',
 	  'statisticYear' 	=> array('BeModuleAlertStatisticYear', 'compile'),
 	  'statisticTotal' 	=> array('BeModuleAlertStatisticTotal', 'compile')
 	),
 	'departments' => array
 	(
 		'tables' 	=> array('tl_fwm_departments', 'tl_fwm_vehicles'),
-		'icon' 		=> 'system/modules/feuerwehr_manager/assets/images/building.png'
+		'icon' 		=> 'system/modules/feuerwehr-manager/assets/images/building.png'
 	),
 	'configuration' => array
 	(
 		'tables' => array('tl_fwm_configuration'),
-		'icon'	 => 'system/modules/feuerwehr_manager/assets/images/settings.gif'
+		'icon'	 => 'system/modules/feuerwehr-manager/assets/images/settings.gif'
 	)
 );
 
