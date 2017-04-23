@@ -183,7 +183,7 @@ $GLOBALS['TL_DCA']['tl_fwm_alerts'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_fwm_alerts']['departments'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'foreignKey'							=> 'tl_fwm_departments.title',
+			'foreignKey'              => 'tl_fwm_departments.title',
 			'default'									=> array(Config::get('fwmMainDepartment')),
 			'eval'                    => array('tl_class'=>'w50 autoheight', 'multiple'=>true,'size'=>10,'submitOnChange'=>true),
 			'sql'											=> "varchar(255) NOT NULL default ''"
@@ -303,11 +303,11 @@ class tl_fwm_alerts extends Backend
 	}
 
 	public function getVehicles(DataContainer $dc){
-			$opt    = array();
+			$opt = array();
 			$departments = $dc->activeRecord->departments;
+			$departments = array_filter(deserialize($departments));
 
 			if (empty($departments) === false) {
-					$departments = deserialize($departments);
 					$result = FwmVehiclesModel::getVehiclesByDepartmentIds($departments);
 
 					if ($result) {
