@@ -1,5 +1,4 @@
-<input id="pac-input" class="controls" type="text" placeholder="Search Box" />
-
-<div id="map" style="height: 300px;">
-
-</div>
+<?php if($this->render === true): ?>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+  <div id="map" style="height: 300px;"></div>
+<?php endif; ?>
