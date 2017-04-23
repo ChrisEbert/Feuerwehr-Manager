@@ -183,8 +183,8 @@ $GLOBALS['TL_DCA']['tl_fwm_alerts'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_fwm_alerts']['departments'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'foreignKey'							=> 'tl_fwm_departments.title',
-			'default'									=> array(Config::get('fwmMainDepartment')),
+			//'foreignKey'							=> 'tl_fwm_departments.title',
+			//'default'									=> array(Config::get('fwmMainDepartment')),
 			'eval'                    => array('tl_class'=>'w50 autoheight', 'multiple'=>true,'size'=>10,'submitOnChange'=>true),
 			'sql'											=> "varchar(255) NOT NULL default ''"
 		),
@@ -310,10 +310,12 @@ class tl_fwm_alerts extends Backend
 					$departments = deserialize($departments);
 					$result = FwmVehiclesModel::getVehiclesByDepartmentIds($departments);
 
-					while($result->next()){
-							$row = $result->row();
-							$departmentName = FwmDepartmentsModel::getDepartmentById($row['pid'])->row()['title'];
-							$opt[$departmentName][$row['id']] = $row['title'];
+					if ($result) {
+						while($result->next()){
+								$row = $result->row();
+								$departmentName = FwmDepartmentsModel::getDepartmentById($row['pid'])->row()['title'];
+								$opt[$departmentName][$row['id']] = $row['title'];
+						}
 					}
 			}
 

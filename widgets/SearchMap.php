@@ -27,7 +27,11 @@ class SearchMap extends \Widget
       $mainDepartmentId = Config::get('fwmMainDepartment');
 
       if (empty($mainDepartmentId) === false) {
-        $this->mapCenter = FwmDepartmentsModel::getDepartmentById($mainDepartmentId)->row()['latlng'];
+        $mainDepartment = FwmDepartmentsModel::getDepartmentById($mainDepartmentId);
+
+        if ($mainDepartment) {
+          $this->mapCenter = $mainDepartment->row()['latlng'];
+        }
       }
 
       $this->applyScripts();
