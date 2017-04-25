@@ -4,15 +4,27 @@ namespace Contao;
 
 class Alert extends \Frontend
 {
+	public $departments = array();
+
+	public $vehicles = array();
+
 	public function __construct(array $options = array())
 	{
 		parent::__construct();
 
 		$this->previewSize = deserialize($options['previewSize']);
 
-		$this->departments = Alert::fetchById(FwmDepartmentsModel::findAll()->fetchAll());
+		$objDepartments = FwmDepartmentsModel::findAll();
 
-		$this->vehicles = Alert::fetchById(FwmVehiclesModel::findAll(array('order'=>'pid'))->fetchAll());
+		if ($objDepartments) {
+			$this->departments = Alert::fetchById($objDepartments->fetchAll());
+		}
+
+		$objVehicles = FwmVehiclesModel::findAll(array('order'=>'pid'));
+
+		if ($objVehicles) {
+			$this->vehicles = Alert::fetchById($objVehicles->fetchAll());
+		}
 	}
 
 	public function prepare(array $arrAlert = array())
@@ -68,11 +80,14 @@ class Alert extends \Frontend
 
 	public function unserializeValues($serialized, $model)
 	{
-		$unserialized = deserialize($serialized);
 		$result = array();
 
-		foreach ($unserialized as $item) {
-			$result[] = $model[$item];
+		if (empty($serialized) === false) {
+			$unserialized = deserialize($serialized);
+
+			foreach ($unserialized as $item) {
+				$result[] = $model[$item];
+			}
 		}
 
 		return $result;
