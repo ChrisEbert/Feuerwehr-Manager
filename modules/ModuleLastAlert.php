@@ -64,7 +64,9 @@ class ModuleLastAlert extends \Module
 
 		$alert = new Alert();
 
-		$this->Template->alertListPage = $objAlertListPage->getAbsoluteUrl();
+		if (empty($objAlertListPage) === false) {
+			$this->Template->alertListPage = $objAlertListPage->getAbsoluteUrl();
+		}
 
 		$this->Template->alert = $alert->prepare($objAlert->row());
 	}
