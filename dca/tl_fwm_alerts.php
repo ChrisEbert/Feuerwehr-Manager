@@ -217,8 +217,10 @@ class tl_fwm_alerts extends Backend
 		$time = time();
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
 
-		$date = $this->parseDate("d.m. H:i", $arrRow['dateStart']);
-		$year = $this->parseDate("Y", $arrRow['dateStart']);
+		if (empty($arrRow['dateStart']) === false) {
+			$date = $this->parseDate("d.m. H:i", $arrRow['dateStart']);
+			$year = $this->parseDate("Y", $arrRow['dateStart']);
+		}
 
 		if ($year !== $this->tmpYear) {
 			$objAlerts = FwmAlertsModel::getAlertsByYear($year, null, false);
