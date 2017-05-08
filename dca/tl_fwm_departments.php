@@ -50,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_fwm_departments'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_fwm_departments']['edit'],
 				'href'                => 'table=tl_fwm_vehicles',
-				'icon'                => 'system/modules/feuerwehr_manager/assets/images/fire-truck.png'
+				'icon'                => 'system/modules/feuerwehr-manager/assets/images/fire-truck.png'
 			),
 			'editheader' => array
 			(
