@@ -3,14 +3,15 @@
 /**
  * Backend modules
  */
-$GLOBALS['BE_MOD']['fwm'] = array(
+$GLOBALS['BE_MOD']['fwm'] = array
+(
 	'alerts' => array
 	(
-		'tables' 					=> array('tl_fwm_alerts'),
-	  'icon'   					=> 'system/modules/feuerwehr-manager/assets/images/fire.png',
-	  'stylesheet' 			=> 'system/modules/feuerwehr-manager/assets/css/be_style.css',
-	  'statisticYear' 	=> array('BeModuleAlertStatisticYear', 'compile'),
-	  'statisticTotal' 	=> array('BeModuleAlertStatisticTotal', 'compile')
+		'tables' 			=> array('tl_fwm_alerts'),
+		'icon'   			=> 'system/modules/feuerwehr-manager/assets/images/fire.png',
+		'stylesheet' 		=> 'system/modules/feuerwehr-manager/assets/css/be_style.css',
+		'statisticYear'		=> array('BeModuleAlertStatisticYear', 'compile'),
+		'statisticTotal' 	=> array('BeModuleAlertStatisticTotal', 'compile')
 	),
 	'departments' => array
 	(
@@ -30,13 +31,14 @@ $GLOBALS['BE_MOD']['fwm'] = array(
  */
 array_insert($GLOBALS['FE_MOD'], 3, array
 (
-  'fwm' => array
-  (
-		'fwm_last_alert' => 'ModuleLastAlert',
-		'fwm_alert_list' => 'ModuleAlertList',
-    'fwm_alertStatisticReader' 	=> 'ModuleAlertStatisticReader',
-    'fwm_alertStatisticYears' 	=> 'ModuleAlertStatisticYears',
-    'fwm_alertMap' 	            => 'ModuleAlertMap'
+	'fwm' => array
+	(
+		'fwm_last_alert' 			=> 'ModuleLastAlert',
+		'fwm_alert_list' 			=> 'ModuleAlertList',
+		'fwm_alert_filter' 			=> 'ModuleAlertFilter',
+    	'fwm_alertStatisticReader' 	=> 'ModuleAlertStatisticReader',
+    	'fwm_alertStatisticYears' 	=> 'ModuleAlertStatisticYears',
+    	'fwm_alertMap' 	            => 'ModuleAlertMap'
 	)
 ));
 
@@ -52,3 +54,5 @@ $GLOBALS['TL_CTE']['fwm'] = array
 $GLOBALS['BE_FFL']['searchMap'] = 'SearchMap';
 
 $GLOBALS['TL_HOOKS']['simpleAjaxFrontend'][] = array('AlertDetails', 'getDetails');
+
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Fwm\Filter', 'replaceYearInsertTag');

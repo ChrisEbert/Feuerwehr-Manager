@@ -61,16 +61,25 @@ class ModuleAlertList extends \Module
 
 		$alert = new Alert($alertOptions);
 
-		switch ($this->filter) {
-	    case 'year':
-					$currentYear = (int)$this->parseDate('Y', time());
-					$objAlerts = FwmAlertsModel::getAlertsByYear($currentYear);
+		switch ($this->listFilter) 
+		{
+			case 'year':
+				$year = intval(\Input::get('year'));
 
-	        break;
+				if (empty($year) === true) 
+				{
+					$year = (int)$this->parseDate('Y', time());
+				}
+
+				$objAlerts = FwmAlertsModel::getAlertsByYear($year);
+
+				break;
 		}
 
-		if ($objAlerts) {
-			while($objAlerts->next()) {
+		if ($objAlerts !== null) 
+		{
+			while($objAlerts->next()) 
+			{
 				$arrAlerts[] = $alert->prepare($objAlerts->row());
 			}
 
