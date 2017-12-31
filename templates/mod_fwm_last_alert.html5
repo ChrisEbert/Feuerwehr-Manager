@@ -7,19 +7,23 @@
   </div>
 
   <div class="infos">
-    <div class="type">
-      <span class="label">Art</span>
-      <span class="value"><?= $this->alert['type']; ?></span>
-    </div>
+    <?php if($this->alert): ?>
+      <div class="type">
+        <span class="label">Art</span>
+        <span class="value"><?= $this->alert['type']; ?></span>
+      </div>
 
-    <div class="type">
-      <span class="label">Datum</span>
-      <span class="value"><?= $this->alert['dateStart']['date']; ?> Uhr</span>
-    </div>
+      <div class="type">
+        <span class="label">Datum</span>
+        <span class="value"><?= $this->alert['dateStart']['date']; ?> Uhr</span>
+      </div>
 
-    <div class="type">
-      <span class="label">Ort</span>
-      <span class="value"><?= $this->alert['location']; ?></span>
-    </div>
+      <div class="type">
+        <span class="label">Ort</span>
+        <span class="value"><?= $this->alert['location']; ?></span>
+      </div>
+    <?php else: ?>
+      Keine Einsätze vorhanden.
+    <?php endif; ?>
   </div>
 </div>

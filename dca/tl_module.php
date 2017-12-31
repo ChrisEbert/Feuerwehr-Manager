@@ -10,30 +10,48 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_last_alert'] = '
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alert_list'] = '
 	{title_legend},name,headline,type;
-	{filter_legend},filter;
+	{filter_legend},listFilter;
 	{image_legend},imgSize;
+	{template_legend:hide},fwm_template;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests,cssID,space';
+
+$GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alert_filter'] = '
+	{title_legend},name,headline,type;
+	{filter_legend},filterTypes;
+	{redirect_legend},jumpTo;
 	{template_legend:hide},fwm_template;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests,cssID,space';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['fwm_departments'] = array
 (
-	'label'       => &$GLOBALS['TL_LANG']['tl_module']['fwm']['departments'],
-	'exclude'     => true,
-	'inputType'   => 'radio',
+	'label'       	=> &$GLOBALS['TL_LANG']['tl_module']['fwm']['departments'],
+	'exclude'     	=> true,
+	'inputType'   	=> 'radio',
 	'foreignKey'	=> 'tl_fwm_departments.title',
-	'eval'        => array('tl_class' => 'w50'),
-	'sql'					=> "int(10) unsigned NOT NULL default '0'"
+	'eval'        	=> array('tl_class'=>'w50 autoheight'),
+	'sql'			=> "int(10) unsigned NOT NULL default '0'"
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['filter'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['listFilter'] = array
 (
-	'label'     => &$GLOBALS['TL_LANG']['tl_module']['fwm']['filter'],
+	'label'     => &$GLOBALS['TL_LANG']['tl_module']['fwm']['listFilter'],
 	'exclude'   => true,
 	'inputType'	=> 'select',
-	'options'		=> array('year'=>'Jahr'),
-	'eval'      => array('tl_class' => 'w50'),
-	'sql'				=> "varchar(32) NOT NULL default ''"
+	'options'	=> array('year'=>'Jahr'),
+	'eval'      => array('tl_class'=>'w50'),
+	'sql'		=> "varchar(32) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['filterTypes'] = array
+(
+	'label'     => &$GLOBALS['TL_LANG']['tl_module']['fwm']['filterTypes'],
+	'exclude'   => true,
+	'inputType'	=> 'checkbox',
+	'options'	=> array('year'=>'Jahr'),
+	'eval'      => array('tl_class'=>'w50 autoheight', 'multiple'=>true),
+	'sql'		=> "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['fwm_alertMap'] = '

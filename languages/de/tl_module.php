@@ -23,4 +23,5 @@ $GLOBALS['TL_LANG']['tl_module']['department_legend']	= 'Feuerwachen';
 $GLOBALS['TL_LANG']['tl_module']['filter_legend']	= 'Filter';
 
 $GLOBALS['TL_LANG']['tl_module']['fwm']['departments'] = array('Feuerwachen', 'Von dieser Feuerwache wird der letzte Einsatz angezeigt.');
-$GLOBALS['TL_LANG']['tl_module']['fwm']['filter'] = array('Filter', 'Anhand welches Kriterium sollen die Einsätze aufgelistet werden.');
+$GLOBALS['TL_LANG']['tl_module']['fwm']['listFilter'] = array('Filter', 'Anhand welches Kriterium sollen die Einsätze aufgelistet werden.');
+$GLOBALS['TL_LANG']['tl_module']['fwm']['filterTypes'] = array('Filterarten', 'Welche Filter sollen angezeigt werden?');

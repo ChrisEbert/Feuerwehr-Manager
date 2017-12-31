@@ -54,20 +54,21 @@ class ModuleLastAlert extends \Module
 	 */
 	protected function compile()
 	{
-		global $objPage;
-
 		$objAlertListPage = \PageModel::findWithDetails($this->jumpTo);
 
+		if ($objAlertListPage !== null) {
+			$this->Template->alertListPage = $objAlertListPage->getAbsoluteUrl();
+		}
+		
 		$department = $this->fwm_departments;
 
 		$objAlert = \FwmAlertsModel::getAlertsByDepartment($department, 1);
+		
+		if ($objAlert !== null) 
+        {
+			$alert = new Alert();
 
-		$alert = new Alert();
-
-		if (empty($objAlertListPage) === false) {
-			$this->Template->alertListPage = $objAlertListPage->getAbsoluteUrl();
+			$this->Template->alert = $alert->prepare($objAlert->row());
 		}
-
-		$this->Template->alert = $alert->prepare($objAlert->row());
 	}
 }

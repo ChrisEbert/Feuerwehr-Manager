@@ -1,0 +1,13 @@
+Aktuelles Jahr: {{fwm::filterYear}}
+
+<?php if(empty($this->filter['years']) === false): ?>
+    <?php foreach ($this->filter['years'] as $year => $yearDetails): ?>
+        <?php if ($yearDetails['active'] === true): ?>
+            <span class="active"><?= $year; ?></span>
+        <?php else: ?>
+            <a href="<?= $yearDetails['link']; ?>">
+                <?= $year; ?>
+            </a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

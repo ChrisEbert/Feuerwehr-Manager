@@ -20,13 +20,13 @@ class FwmAlertsModel extends \Model
 	{
 		$arrOptions['order'] = 'dateStart DESC';
 
-
-		$from = mktime(0,0,0,1,1,$year);
-		$to = mktime(0,0,0,1,1,$year + 1);
+		$from = mktime(0, 0, 0, 1, 1, $year);
+		$to = mktime(0, 0, 0, 1, 1, $year + 1);
 
 		$query = array("dateStart >= $from AND dateStart < $to");
 
-		if ($published === true) {
+		if ($published === true) 
+		{
 			$query[] = 'published=1';
 		}
 
