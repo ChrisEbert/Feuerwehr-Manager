@@ -69,7 +69,12 @@ class ModuleAlertFilter extends \Module
                 $filter['years'] = array();
                 $years = array();
 
-                $activeYearFilter = intval(\Input::get('year'));
+                $activeYear = intval(\Input::get('year'));
+
+                if (empty($activeYear) === true) 
+                {
+                    $activeYear = (int)$this->parseDate('Y', time());
+                }
 
                 if (empty($year) === true) 
                 {
@@ -89,7 +94,7 @@ class ModuleAlertFilter extends \Module
                     $filter['years'][$year] = array
                     (
                         'link' => $objAlertListPage->getAbsoluteUrl() . '?year=' . $year,
-                        'active' => ($activeYearFilter === (int)$year)
+                        'active' => ($activeYear === (int)$year)
                     );
                 }
             }
