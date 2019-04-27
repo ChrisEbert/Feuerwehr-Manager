@@ -94,6 +94,12 @@ class ModuleAlertList extends \Module
 			}
 		}
 
+		$activeAlert = intval(\Input::get('alert'));
+
+		if (empty($activeAlert) === false) {
+			$this->Template->activeAlert = $activeAlert;
+		}
+
 		$this->Template->totalAlerts = count($arrAlerts);
 
 		$this->Template->alerts = $arrAlerts;

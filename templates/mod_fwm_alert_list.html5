@@ -2,6 +2,7 @@
   <div class="alert-list">
     <?php
       $lastMonth = '';
+      $alertCounter = $this->totalAlerts;
     ?>
     <?php foreach($this->alerts as $alert): ?>
       <?php $month = $this->parseDate('F', $alert['dateStart']['timestamp']); if($month !== $lastMonth): ?>
@@ -10,10 +11,10 @@
         </div>
       <?php $lastMonth = $month; endif; ?>
 
-      <div class="alert js-alert">
+      <div class="alert js-alert<?php if($alertCounter === $this->activeAlert) echo ' active'; ?>">
         <div class="date-holder">
           <div class="number">
-            <?= $this->totalAlerts; ?>
+            <?= $alertCounter; ?>
           </div>
 
           <div class="date">
@@ -102,7 +103,7 @@
           </div>
         </div>
       </div>
-    <?php $this->totalAlerts--; endforeach; ?>
+    <?php $alertCounter--; endforeach; ?>
   </div>
 <?php else: ?>
   <div>
